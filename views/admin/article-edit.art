@@ -1,0 +1,16 @@
+{{extend './common/layout.art'}}
+
+{{block 'titleName'}}
+<title>投稿界面</title>
+{{/block}}
+
+{{block 'aside'}}
+<!--左侧的部分 -->
+{{include './common/header.art'}}
+{{/block}}
+
+{{block 'headerName'}}文章编辑信息{{/block}}
+
+{{block 'right'}}
+{{include './common/articleForm.art'}}
+{{/block}}

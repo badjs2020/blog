@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/admin/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/admin/css/base.css">
+  <link rel="icon" href="/admin/images/blog.svg" type="image/x-icon">
+  <title>登录界面</title>
+  <style>
+    body {
+      background-color: #F2F2F2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-body">
+    <div class="login-container">
+      <h1 class="title">博客管理员登录</h1>
+      <div class="login">
+        <form action="/admin/login" method="post" id="loginForm" class="panel panel-default">
+          <div class="form-group">
+            <label class="glyphicon glyphicon-envelope">邮件</label>
+            <input type="email" name="email" class="form-control" placeholder="请输入邮件地址">
+          </div>
+          <div class="err">
+            <span id="err_email">请输入邮件信息</span>
+          </div>
+          <div class="form-group">
+            <label class="glyphicon glyphicon-lock">密码</label>
+            <input type="password" name="password" class="form-control" placeholder="请输入密码">
+          </div>
+          <div class="err">
+            <span id="err_pwd">请输入密码</span>
+          </div>
+          <button type="submit" class="btn btn-primary">登录</button>
+        </form>
+      </div>
+      <div class="tips"></div>
+    </div>
+  </div>
+  <script src="/admin/lib/jquery/dist/jquery.min.js"></script>
+  <script src="/admin/js/common.js"></script>
+  <script>
+    //为表单添加提交事件
+    $('#loginForm').on('submit', function () {
+      var result = serializeToJson($(this))
+      var flag;
+      //如果用户没有输入邮件地址的话
+      if (result.email.trim().length == 0) {
+        $('#err_email').css('display', 'block');
+        //组织程序向下执行
+        flag = false;
+      } else if (result.email.trim().length != 0) {
+        $('#err_email').css('display', 'none');
+      }
+      if (result.password.trim().length == 0) {
+        $('#err_pwd').css('display', 'block');
+        flag = false;
+      } else if (result.password.trim().length != 0) {
+        $('#err_pwd').css('display', 'none');
+      }
+      return flag;
+      // 阻止表单默认提交的行为
+      return false;
+    })
+  </script>
+
+</body>
+
+</html>

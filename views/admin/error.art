@@ -1,0 +1,24 @@
+{{extend './common/layout.art'}}
+
+{{block 'titleName'}}
+<title>错误界面</title>
+{{/block}}
+
+{{block 'aside'}}
+<!--左侧的部分 -->
+{{include './common/header.art'}}
+{{/block}}
+
+{{block 'headerName'}}错误界面{{/block}}
+
+{{block 'right'}}
+ <p class="bg-danger error">{{msg}}</p>
+{{/block}}
+
+{{block 'script'}}
+<script>
+  setTimeout(function(){
+    location.href='/admin/login'
+  },3000)
+</script>
+{{/block}}
