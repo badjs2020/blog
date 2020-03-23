@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 //导入用户集合构造函数
 const { User } = require("../../model/user");
 
-module.exports=async (req, res) => {
+module.exports = async (req, res) => {
   //接收请求参数
   // res.send(req.body);
   //进行解构操作
@@ -25,19 +25,27 @@ module.exports=async (req, res) => {
   if (user) {
     //将客户端传递过来的密码和用户信息中的密码进行比对
     let isValid = await bcrypt.compare(password, user.password);
-    console.log("isValid=", isValid);
+    // console.log("isValid=", isValid);
 
     //如果密码比对成功
     if (isValid) {
       //如果登录成功，将用户名存在req请求对象中
-      console.log('username=',user.username);
-      req.session.username=user.username;
+      // console.log("username=", user.username);
+      req.session.username = user.username;
+      //将用户角色存储在req的session中
+      req.session.role=user.role;
       //将数据保存到app.locals中
-      req.app.locals.userInfo=user;
+      req.app.locals.userInfo = user;
+      //对用户的角色进行判断
+      if (user.role == "admin") {
+        //重定向到用户列表页面
+        res.redirect("/admin/user");
+      }else if(user.role=='normal'){
+        //重定向到首页
+        res.redirect("/home/");
+      }
       //登录成功
       // res.send("登录成功");
-      //重定向到用户列表页面
-      res.redirect('/admin/user');
     } else {
       res.status(400).render("admin/error", { msg: "邮箱地址或者密码错误" });
     }
@@ -45,5 +53,4 @@ module.exports=async (req, res) => {
     //没有查询到用户
     res.status(400).render("admin/error", { msg: "邮箱地址或者密码错误" });
   }
-}
-
+};

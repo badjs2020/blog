@@ -1,16 +1,16 @@
 <header class='col-md-2'>
   <div class="logo">
-    <a href="#">
+    <a href="/home/">
       <span>博客管理页面</span>
     </a>
   </div>
   <div class="nav">
     <ul>
       <li>
-        <a href="/admin/user" class="glyphicon glyphicon-user">用户管理</a>
+        <a href="/admin/user" class="{{currentLink=='user'?'actived':''}} glyphicon glyphicon-user">用户管理</a>
       </li>
       <li>
-        <a href="/admin/article" class="glyphicon glyphicon-file">文章管理</a>
+        <a href="/admin/article" class="{{currentLink=='article'?'actived':''}} glyphicon glyphicon-file">文章管理</a>
       </li>
     </ul>
   </div>

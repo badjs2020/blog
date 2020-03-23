@@ -1,0 +1,35 @@
+<!-- 头部框架开始 -->
+<nav class="mynavbar navbar-inverse navbar-fixed-top">
+  <div class="col-lg-1">
+    <a class="navbar-brand" href="/home/">
+      <img alt="Brand" src="./images/logo.svg">
+    </a>
+  </div>
+  <div class="col-md-offset-9 col-lg-2">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/home/">Home</a>
+      </li>
+      <li class="dropdown">
+        {{if userInfo}}
+        
+          <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="true">
+            {{userInfo.username}}
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+             {{if userInfo.role=='admin'}}
+             <li><a href="/admin/user">用户管理</a></li>
+            {{/if}}
+              <li><a href="/home/logout">退出登录</a></li>
+            </ul>
+      
+        {{else}}
+        <a href="/admin/login">Login </a>
+
+        {{/if}}
+      </li>
+    </ul>
+  </div>
+</nav>

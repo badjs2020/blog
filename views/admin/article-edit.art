@@ -2,6 +2,19 @@
 
 {{block 'titleName'}}
 <title>投稿界面</title>
+<style>
+  header .nav{
+    height: 1000px
+  }
+  .showimg img{
+    width:150px;
+  }
+  @media screen and (max-width: 991px){
+    header .nav {
+    height:40px;
+  }
+  }
+</style>
 {{/block}}
 
 {{block 'aside'}}
@@ -9,8 +22,69 @@
 {{include './common/header.art'}}
 {{/block}}
 
-{{block 'headerName'}}文章编辑信息{{/block}}
+{{block 'headerName'}}<h1>{{button=='修改'?'文章修改':'投稿'}}</h1>{{/block}}
+{{block 'err_msg'}}<p class="bg-danger error">{{message}}</p>{{/block}}
 
 {{block 'right'}}
-{{include './common/articleForm.art'}}
+<form action='{{link}}' method='post' enctype="multipart/form-data">
+  <div class="form-group">
+    <label>标题</label>
+    <input name='title' type="text" class="form-control" id="articleTitle" placeholder="请输入文章标题" value="{{article&&article.title}}">
+  </div>
+  <div class="form-group">
+    <label>作者</label>
+    <input name="author" type="text" class="form-control" id="author" value="{{@userInfo._id}}" readonly>
+  </div>
+  <div class="form-group">
+    <label>发布时间</label>
+    <input name="publishDate" type="date" class="form-control" id="author" value="{{article&&dateFormat(article.publishDate,'yyyy-mm-dd')}}">
+  </div>
+  <div class="form-group">
+    <label>内容</label>
+    <!-- <textarea class="form-control" id='editor'></textarea> -->
+    <textarea id="summernote" name="content">
+      {{article&&article.content}}
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile"></label>
+    <input name='cover' type="file" id="file" value="{{article&&article.cover}}">
+    <div class="thumbnail-waper showimg">
+      <img src="{{article&&article.cover}}" class="img-thumbnail" id="preview">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">{{button}}</button>
+</form>
+{{/block}}
+
+{{block 'script'}}
+<script>
+  var d;
+  $(document).ready(function () {
+    $('#summernote').summernote({
+      height: 200,
+    });
+    d = $("#summernote").summernote("code");
+    console.log(d)
+  });
+
+  var file = document.querySelector('#file')
+  //获取对应的img显示上传文件的标签
+  var preview=document.querySelector('#preview')
+  //当用户选择完文件以后
+  file.onchange = function () {
+    // 1、创建文件读取对象
+    var reader = new FileReader();
+    //下面这个代表用户选择的文件列表
+    // console.log(this.files[0])
+    //2、读取文件,异步方法
+    reader.readAsDataURL(this.files[0]);
+    //监听onload事件,onload代表文件读取完成
+    reader.onload = function () {
+      // console.log(reader.result);
+      //将文件显示的结果显示在页面中
+      preview.src=reader.result;
+    }
+  }
+</script>
 {{/block}}

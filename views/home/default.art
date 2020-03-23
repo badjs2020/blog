@@ -1,0 +1,42 @@
+{{extend './common/layout.art'}}
+{{block 'link'}}
+<link rel="stylesheet" href="/home/css/default.css">
+{{/block}}
+
+{{block 'main'}}
+{{include './common/navbar.art'}}
+<!-- 文章框架开始 -->
+<article class="container">
+  <div class="row">
+    {{each result.records}}
+    <div class="square col-xs-8 col-sm-6 col-md-4 col-lg-5">
+      <div class="thumbnail">
+        <a href="/home/article?id={{@$value._id}}">
+          <img src="{{$value.cover}}" alt="...">
+        </a>
+        <div class="caption">
+          <a href="/home/article?id={{@$value._id}}" class='article-title'><h4>{{$value.title}}</h4></a>
+          <span class='author'>{{$value.author.username}} |</span>
+          <span class="date">{{dateFormat($value.publishDate,'yyyy-mm-dd')}}</span>
+          <p class="brief">
+            {{@$value.content.replace(/<[^>]+>/g,'').substr(0,100)+'...'}}
+          </p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+</article>
+<nav>
+  <ul class="pager">
+    {{if result.page>1}}
+    <li><a href="/home?page={{result.page-1}}">Previous</a></li>
+    {{/if}}
+    {{each result.display}}
+    <li><a href="/home?page={{$value}}" class="{{$value==result.page?'active':''}}">{{$value}}</a></li>
+    {{/each}}
+    {{if result.page<result.pages}}
+    <li><a href="/home?page={{result.page-0+1}}">Next</a></li>
+    {{/if}}
+  </ul>
+</nav>
+{{/block}}

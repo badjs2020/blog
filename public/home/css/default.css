@@ -1,0 +1,89 @@
+body{
+  background-color: #fafafa!important;
+}
+.container {
+  width: 100%;
+}
+.mynavbar {
+  width: 100%;
+  height: 50px;
+  border-radius: 0px !important;
+}
+.navbar-brand {
+  padding-top: 3px !important;
+}
+.navbar-brand img {
+  display: block;
+  margin-top: 0px;
+  width: 40px;
+}
+.navbar-nav {
+  float: right;
+}
+article{
+  margin-top: 50px;
+}
+.square {
+  width: 300px;
+}
+.thumbnail {
+  border: 1px solid black!important;
+  box-shadow: 5px 2px 2px 2px #eee;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pager li>a:focus, .pager li>a:hover {
+  text-decoration: none;
+  background-color: lightblue!important;
+}
+.pager li>a, .pager li>span {
+  border: 1px solid black!important;
+}
+.thumbnail{
+  height: 380px;
+}
+.thumbnail:hover{
+  transform: translateY(-1%);
+}
+.thumbnail a>img {
+  height: 200px!important;
+}
+.thumbnail .caption a h4{
+  color:black;
+  font-size:16px;
+  font-weight: bolder!important;
+  font-family: "Microsoft YaHei"!important
+}
+.thumbnail .author{
+  color:darkorange;
+}
+.thumbnail .date{
+  color:darkorchid
+}
+.pager .active{
+  background-color: skyblue;
+}
+.dropdown-menu{
+  min-width: 125px!important;
+}
+@media screen and (min-width: 1280px) {
+  .square:nth-child(odd) {
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+  .square:nth-child(even) {
+    margin-top: 20px;
+  }
+}
+/* 中屏 */
+@media screen and (max-width: 991px) {
+  .square {
+   margin:0 auto;
+  }
+}
+/*进入超小屏幕之后，文字会变小*/
+@media screen and (max-width: 767px) {
+  .square {
+    margin:20px 80px;
+   }
+}
